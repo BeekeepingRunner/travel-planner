@@ -7,10 +7,12 @@ import { MaterialModule } from './material/material.module';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
+import { DbTestComponent } from './db-test/db-test.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DbTestComponent
   ],
   imports: [
     BrowserModule,
