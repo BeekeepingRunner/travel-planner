@@ -1,8 +1,10 @@
 .container {
     &__form {
+        max-width: 20em;
         display: flex;
         flex-direction: column;
-        
+        margin: 2em 0 0 2em;
+
         &--login {
 
         }
