@@ -1,0 +1,14 @@
+.container {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        
+        &--login {
+
+        }
+
+        &--password {
+
+        }
+    }
+}

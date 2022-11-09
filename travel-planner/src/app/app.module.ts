@@ -1,10 +1,12 @@
+import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './login/login.component';
+import { RoutingModule } from './routing/routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
 import { DbTestComponent } from './db-test/db-test.component';
@@ -12,14 +14,16 @@ import { DbTestComponent } from './db-test/db-test.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DbTestComponent
+    DbTestComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    SharedModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

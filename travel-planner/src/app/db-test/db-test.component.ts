@@ -11,7 +11,7 @@ interface Item {
 @Component({
   selector: 'app-db-test',
   templateUrl: './db-test.component.html',
-  styleUrls: ['./db-test.component.css']
+  styleUrls: ['./db-test.component.scss']
 })
 export class DbTestComponent implements OnInit {
 
