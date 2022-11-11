@@ -1,10 +1,19 @@
 <div class="my-travel-list">
-    <button class="my-travel-list--add-button" mat-raised-button color="primary"
-        (click)="onAddTravelClick()">
-        Add new travel
-    </button>
+    <fieldset class="my-travel-list__my-travels">
+        <legend><b>My travels</b></legend>
 
-    <div class="my-travel-list__travels">
-        Here will go added travels
-    </div>
+        <div class="my-travel-list____my-travels__travels">
+            <div *ngFor="let travel of travels | async">
+                <button class="my-travel-list__my-travels__travels--travel" mat-stroked-button color="primary"
+                    (click)="onTravelClick()">
+                    {{ travel.name }}
+                </button>
+            </div>
+        </div>
+
+        <button class="my-travel-list__my-travels--add-button" mat-raised-button color="primary"
+            (click)="onAddTravelClick()">
+            Add new travel
+        </button>
+    </fieldset>
 </div>

@@ -1,6 +1,18 @@
 .my-travel-list {
 
-    &__travels {
-        margin-top: 2em;
+    &__my-travels {
+        border-radius: 0.3em;
+
+        &__travels {
+            &--travel {
+                width: 20em;
+                height: 3.5em;
+                border-color: purple;
+            }
+        }
+
+        &--add-button {
+            margin-top: 2em;
+        }
     }
 }

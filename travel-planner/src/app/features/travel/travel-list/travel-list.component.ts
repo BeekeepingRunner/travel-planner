@@ -1,7 +1,8 @@
+import { Observable } from 'rxjs';
 import { NewTravelDialogComponent } from './new-travel-dialog/new-travel-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-travel-list',
@@ -10,14 +11,23 @@ import { Firestore, collection } from '@angular/fire/firestore';
 })
 export class TravelListComponent implements OnInit {
 
+  public travels: Observable<any[]> = new Observable();
+
   constructor(
     public dialog: MatDialog,
-    private firestore: Firestore
-  ) { }
+    private firestore: AngularFirestore
+  ) {}
 
   ngOnInit(): void {
+    this.travels = this.firestore.collection('travels').valueChanges();
+    console.log(this.travels);
+
   }
 
+  public onTravelClick(): void {
+
+  }
+  
   public onAddTravelClick(): void {
     this.dialog.open(NewTravelDialogComponent).afterClosed().subscribe(newTravelModel => {
       // add new travel
