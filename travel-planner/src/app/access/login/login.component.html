@@ -1,16 +1,6 @@
 <div class="container">
-    <form class="container__form">
-      <h3><b>Log in</b></h3>
-      <mat-form-field class="container__form--login">
-        <mat-label>Login</mat-label>
-        <input matInput placeholder="Enter login">
-      </mat-form-field>
-    
-      <mat-form-field class="container__form--password">
-        <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter password">
-      </mat-form-field>
-
-      <button mat-button color="primary" class="container__form--register">You don't have an account? Sign up</button>
-    </form>
+  <button mat-button color="primary" class="container__form--register"
+    (click)="onLoginCLick()">
+    Login with google
+  </button>
 </div>

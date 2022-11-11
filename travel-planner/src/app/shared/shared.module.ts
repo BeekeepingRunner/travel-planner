@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
     MaterialModule
   ],
   exports: [
+    CommonModule,
     MaterialModule
   ]
 })

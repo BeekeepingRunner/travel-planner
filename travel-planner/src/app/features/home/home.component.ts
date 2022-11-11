@@ -1,3 +1,5 @@
+import { AuthService } from './../../access/auth/auth.service';
+import { AppUser } from './../../access/auth/user';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() { }
+  public user: AppUser | undefined = undefined;
 
+  constructor(public authService: AuthService) {
+    const optionalUser = this.authService.getUser();
+    if (optionalUser)
+      this.user = optionalUser;
+  }
 }

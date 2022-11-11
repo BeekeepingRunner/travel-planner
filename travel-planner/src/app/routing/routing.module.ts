@@ -13,7 +13,7 @@ import { LoginComponent } from '../access/login/login.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent },
-      { path: '**', redirectTo: '/home', pathMatch: 'full' }
+      { path: '**', redirectTo: '/login', pathMatch: 'full' }
     ])
   ],
   exports: [

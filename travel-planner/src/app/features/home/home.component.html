@@ -1,4 +1,7 @@
-<div class="home-container">
-    <h2 class="home-container--title">Home page</h2>
+<div *ngIf="user" class="home-container">
+    <h2 class="home-container--title">Hello {{ user.displayName }}</h2>
     <app-travel-list class="home-container--travels"></app-travel-list>
+</div>
+<div *ngIf="!user">
+    You are not logged in
 </div>

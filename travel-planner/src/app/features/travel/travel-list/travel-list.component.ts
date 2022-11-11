@@ -1,6 +1,7 @@
 import { NewTravelDialogComponent } from './new-travel-dialog/new-travel-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
+import { Firestore, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-travel-list',
@@ -10,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class TravelListComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private firestore: Firestore
   ) { }
 
   ngOnInit(): void {

@@ -1,8 +1,10 @@
+import { firebaseConfig } from 'src/environments/environment';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 
 
@@ -16,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
+  ],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: firebaseConfig }
   ]
 })
 export class AccessModule { }
