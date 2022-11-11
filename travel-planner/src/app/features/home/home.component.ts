@@ -12,7 +12,7 @@ export class HomeComponent {
   public user: AppUser | undefined = undefined;
 
   constructor(public authService: AuthService) {
-    const optionalUser = this.authService.getUser();
+    const optionalUser = AuthService.getUser();
     if (optionalUser)
       this.user = optionalUser;
   }

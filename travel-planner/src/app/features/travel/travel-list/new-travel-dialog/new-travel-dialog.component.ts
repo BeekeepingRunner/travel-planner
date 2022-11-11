@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../access/auth/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -26,13 +27,18 @@ export class NewTravelDialogComponent {
   }
 
   public onConfirmClick(): void {
-    let travelModel: NewTravelModel = {
-      name: this.form.get('nameControl')?.value
+    const userMail: string | undefined = AuthService.getUser()?.email;
+    if (userMail) {
+      let travelModel: NewTravelModel = {
+        name: this.form.get('nameControl')?.value,
+        userMail: userMail
+      }
+      this.dialogRef.close(travelModel);
     }
-    this.dialogRef.close(travelModel);
   }
 }
 
 export interface NewTravelModel {
   name: string;
+  userMail: string;
 }
