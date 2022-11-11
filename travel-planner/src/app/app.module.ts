@@ -1,5 +1,6 @@
+import { AccessModule } from './access/access.module';
 import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './access/login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,8 +15,7 @@ import { DbTestComponent } from './db-test/db-test.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DbTestComponent,
-    LoginComponent
+    DbTestComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +23,8 @@ import { DbTestComponent } from './db-test/db-test.component';
     SharedModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    RoutingModule
+    RoutingModule,
+    AccessModule
   ],
   providers: [],
   bootstrap: [AppComponent]
