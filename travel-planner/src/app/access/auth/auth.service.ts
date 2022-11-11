@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AppUser } from './user';
 import { Injectable } from '@angular/core';
 
@@ -9,7 +10,9 @@ export class AuthService {
   private readonly USER_MAIL_KEY: string = 'userMail';
   private readonly USER_NAME_KEY: string = 'userName';
 
-  constructor() { }
+  constructor(
+    public router: Router
+  ) { }
 
   public saveUser(user: AppUser): void {
     window.localStorage.setItem(this.USER_MAIL_KEY, user.email);
@@ -27,5 +30,10 @@ export class AuthService {
       return user;
     }
     else return null;
+  }
+
+  public logout(): void {
+    window.localStorage.clear();
+    this.router.navigate(['login']);
   }
 }

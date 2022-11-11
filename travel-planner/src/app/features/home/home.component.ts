@@ -16,4 +16,8 @@ export class HomeComponent {
     if (optionalUser)
       this.user = optionalUser;
   }
+
+  public onLogoutClick(): void {
+    this.authService.logout();
+  }
 }
