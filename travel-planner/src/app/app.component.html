@@ -1,6 +1,8 @@
 <mat-toolbar class="toolbar" color="primary">
-  <mat-icon>local_fire_department</mat-icon>
-  <span>Travel planner</span>
+  <div class="toolbar__home-link" [routerLink]="['home']">
+    <mat-icon>local_fire_department</mat-icon>
+    <span>Travel planner</span>
+  </div>
 </mat-toolbar>
 <div class="main">
   <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
+import { HomeModule } from './features/home/home.module';
 import { AccessModule } from './access/access.module';
 import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './access/login/login.component';
 import { RoutingModule } from './routing/routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,7 +24,8 @@ import { DbTestComponent } from './db-test/db-test.component';
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     RoutingModule,
-    AccessModule
+    AccessModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,15 @@
+<div class="new-travel-dialog">
+    <h3>Add new travel</h3>
+    <form class="new-travel-dialog__form" [formGroup]="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Travel name</mat-label>
+          <input matInput [formControl]="nameControl">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary"
+            [disabled]="!this.form.valid"
+            (click)="onConfirmClick()">
+            Add new travel
+        </button>
+    </form>
+</div>
