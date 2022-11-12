@@ -10,12 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
-import { DbTestComponent } from './db-test/db-test.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DbTestComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

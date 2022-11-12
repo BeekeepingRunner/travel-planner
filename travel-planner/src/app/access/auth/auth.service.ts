@@ -18,22 +18,18 @@ export class AuthService {
     public router: Router
   ) {
     this.auth.onAuthStateChanged((user: firebase.User | null) => {
-      console.log('AUTH CHANGE');
-      console.log(user);
       if (user) {
-        console.log('user has been logged in')
         if (user?.uid && user?.email && user.displayName) {
           const appUser: AppUser = {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName
           }
-          this._loggedUser.next(appUser)
+          this._loggedUser.next(appUser);
           this.router.navigate(['home']);
         }
       } else {
-        console.log('user has been logged out')
-        this._loggedUser.next(undefined)
+        this._loggedUser.next(undefined);
         this.router.navigate(['login']);
       } 
     });
