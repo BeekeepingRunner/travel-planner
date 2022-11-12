@@ -1,10 +1,11 @@
+import { TravelCommandService } from './../service/travel-command.service';
 import { AppUser } from './../../../access/auth/user';
 import { Observable } from 'rxjs';
 import { NewTravelDialogComponent } from './new-travel-dialog/new-travel-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Travel } from '../entities/travel';
+import { TravelQueryService } from '../service/travel-query.service';
 
 @Component({
   selector: 'app-travel-list',
@@ -16,31 +17,26 @@ export class TravelListComponent implements OnInit {
   @Input()
   public user!: AppUser;
   
-  // TODO: CHANGE any to Travel
-  public travels: Observable<any[]> = new Observable();
+  public travels: Observable<Travel[]> = new Observable();
 
   constructor(
     public dialog: MatDialog,
-    private firestore: AngularFirestore
+    public travelQueryService: TravelQueryService,
+    public travelCommandService: TravelCommandService,
   ) {}
 
   ngOnInit(): void {
-    console.log(this.user);
-    this.travels = this.firestore.collection(
-      Travel.COLLECTION_NAME,
-      ref => ref.where(Travel.USER_ID_FK, '==', this.user.uid)
-    ).valueChanges();
+    this.travels = this.travelQueryService.getTravelsByUserUid(this.user.uid);
   }
 
   public onTravelClick(): void {
-
+    // TODO
   }
 
   public onAddTravelClick(): void {
     this.dialog.open(NewTravelDialogComponent).afterClosed()
       .subscribe(newTravelModel => {
-        const travels: AngularFirestoreCollection = this.firestore.collection(Travel.COLLECTION_NAME);
-        travels.add(newTravelModel);
+        this.travelCommandService.addTravel(newTravelModel);
       });
   }
 }
