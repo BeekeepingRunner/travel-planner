@@ -1,3 +1,4 @@
+import { AppUser } from './../../../../access/auth/user';
 import { AuthService } from './../../../../access/auth/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -15,7 +16,8 @@ export class NewTravelDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<NewTravelDialogComponent>,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public auth: AuthService
   ) {
     this.form = this.formBuilder.group({
       nameControl: this.nameControl
@@ -27,18 +29,19 @@ export class NewTravelDialogComponent {
   }
 
   public onConfirmClick(): void {
-    const userMail: string | undefined = AuthService.getUser()?.email;
-    if (userMail) {
-      let travelModel: NewTravelModel = {
-        name: this.form.get('nameControl')?.value,
-        userMail: userMail
+    this.auth.$loggedUser.subscribe((user: AppUser | undefined) => {
+      if (user) {
+        let travelModel: NewTravelModel = {
+          name: this.form.get('nameControl')?.value,
+          userUID: user.uid
+        }
+        this.dialogRef.close(travelModel);
       }
-      this.dialogRef.close(travelModel);
-    }
+    });
   }
 }
 
 export interface NewTravelModel {
   name: string;
-  userMail: string;
+  userUID: string;
 }

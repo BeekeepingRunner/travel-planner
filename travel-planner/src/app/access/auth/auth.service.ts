@@ -1,3 +1,4 @@
+import { BehaviorSubject, Observable, first } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppUser } from './user';
 import { Injectable } from '@angular/core';
@@ -9,50 +10,41 @@ import firebase from 'firebase/compat/app';
 })
 export class AuthService {
 
-  private static readonly USER_MAIL_KEY: string = 'userMail';
-  private static readonly USER_NAME_KEY: string = 'userName';
+  private _loggedUser: BehaviorSubject<AppUser | undefined> = new BehaviorSubject<AppUser | undefined>(undefined);
+  public $loggedUser: Observable<AppUser | undefined> = this._loggedUser.asObservable();
 
   constructor(
     public auth: AngularFireAuth,
     public router: Router
-  ) { }
-
-  public login(): void {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    this.auth.signInWithPopup(provider)
-      .then(result => {
-        const user: firebase.User | null = result.user;
-        if (user?.email && user?.displayName) {
+  ) {
+    this.auth.onAuthStateChanged((user: firebase.User | null) => {
+      console.log('AUTH CHANGE');
+      console.log(user);
+      if (user) {
+        console.log('user has been logged in')
+        if (user?.uid && user?.email && user.displayName) {
           const appUser: AppUser = {
+            uid: user.uid,
             email: user.email,
             displayName: user.displayName
           }
-          AuthService.saveUser(appUser);
+          this._loggedUser.next(appUser)
           this.router.navigate(['home']);
         }
-      });
+      } else {
+        console.log('user has been logged out')
+        this._loggedUser.next(undefined)
+        this.router.navigate(['login']);
+      } 
+    });
   }
 
-  public static saveUser(user: AppUser): void {
-    window.localStorage.setItem(this.USER_MAIL_KEY, user.email);
-    window.localStorage.setItem(this.USER_NAME_KEY, user.displayName);
-  }
-
-  public static getUser(): AppUser | null {
-    const mail: string | null = window.localStorage.getItem(this.USER_MAIL_KEY);
-    const name: string | null = window.localStorage.getItem(this.USER_NAME_KEY);
-    if (mail && name) {
-      const user: AppUser = {
-        email: mail,
-        displayName: name
-      };
-      return user;
-    }
-    else return null;
+  public login(): void {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    this.auth.signInWithPopup(provider);
   }
 
   public logout(): void {
-    window.localStorage.clear();
-    this.router.navigate(['login']);
+    this.auth.signOut();
   }
 }
