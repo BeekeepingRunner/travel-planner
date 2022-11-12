@@ -1,4 +1,4 @@
-import { AbstractEntity } from './../../../shared/entities';
+import { AbstractEntity } from '../../../shared/persistence/entities';
 
 export class Travel implements AbstractEntity {
 

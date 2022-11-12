@@ -1,7 +1,7 @@
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Travel } from '../entities/travel';
+import { NoSqlRealtimeDataProvider } from 'src/app/shared/persistence/database-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,10 @@ import { Travel } from '../entities/travel';
 export class TravelQueryService {
 
   constructor(
-    private firestore: AngularFirestore
+    private dataProvider: NoSqlRealtimeDataProvider
   ) { }
 
   public getTravelsByUserUid(userUid: string): Observable<Travel[]> {
-    return this.firestore.collection<Travel>(
-      Travel.COLLECTION_NAME,
-      ref => ref.where(Travel.USER_ID_FK, '==', userUid)
-    ).valueChanges();
+    return this.dataProvider.getDocumentsByFieldValue(Travel.COLLECTION_NAME, Travel.USER_ID_FK, userUid);
   }
 }
