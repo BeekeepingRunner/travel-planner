@@ -4,6 +4,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TravelPanelComponent } from '../travel/travel-list/travel-panel/travel-panel.component';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     HomeComponent,
     TravelListComponent,
-    NewTravelDialogComponent
+    NewTravelDialogComponent,
+    TravelPanelComponent
   ],
   imports: [
     SharedModule,
@@ -19,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+    TravelPanelComponent
   ]
 })
 export class HomeModule { }

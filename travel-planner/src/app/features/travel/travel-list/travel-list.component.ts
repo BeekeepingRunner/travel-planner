@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TravelCommandService } from './../service/travel-command.service';
 import { AppUser } from './../../../access/auth/user';
 import { Observable } from 'rxjs';
@@ -23,14 +24,15 @@ export class TravelListComponent implements OnInit {
     public dialog: MatDialog,
     public travelQueryService: TravelQueryService,
     public travelCommandService: TravelCommandService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
     this.travels = this.travelQueryService.getTravelsByUserUid(this.user.uid);
   }
 
-  public onTravelClick(): void {
-    // TODO
+  public onTravelClick(travel: Travel): void {
+    this.router.navigate(['travel', travel.name])
   }
 
   public onAddTravelClick(): void {

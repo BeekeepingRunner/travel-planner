@@ -1,3 +1,4 @@
+import { TravelPanelComponent } from './../features/travel/travel-list/travel-panel/travel-panel.component';
 import { HomeComponent } from './../features/home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,6 +20,10 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
       },
       { 
         path: 'home', component: HomeComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+      },
+      {
+        path: 'travel/:name', component: TravelPanelComponent,
         ...canActivate(redirectUnauthorizedToLogin)
       },
       { path: '**', redirectTo: '/login', pathMatch: 'full' }

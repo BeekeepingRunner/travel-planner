@@ -9,7 +9,7 @@ import { Travel } from '../entities/travel';
 export class TravelCommandService {
 
   constructor(
-    private dataProvider: NoSqlRealtimeDataProvider
+    private dataProvider: NoSqlRealtimeDataProvider,
   ) { }
 
   public addTravel(newTravelModel: NewTravelModel): void {

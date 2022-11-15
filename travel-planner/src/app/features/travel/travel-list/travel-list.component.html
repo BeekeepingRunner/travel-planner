@@ -5,7 +5,7 @@
         <div class="my-travel-list____my-travels__travels">
             <div *ngFor="let travel of travels | async">
                 <button class="my-travel-list__my-travels__travels--travel" mat-stroked-button color="primary"
-                    (click)="onTravelClick()">
+                    (click)="onTravelClick(travel)">
                     {{ travel.name }}
                 </button>
             </div>
